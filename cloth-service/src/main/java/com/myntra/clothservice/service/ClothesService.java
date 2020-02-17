@@ -22,8 +22,8 @@ public class ClothesService {
     public List<Cloth> getAllCloth(String gender) {
         List<Cloth> cloths = clothRepository.findByGender(gender);
         cloths.forEach(c -> {
-            Price price = restTemplate.getForObject("http://localhost:8087/priceservice/" + c.getId(), Price.class);
-            Store store = restTemplate.getForObject("http://localhost:8088/storeservice/" + c.getId(), Store.class);
+            Price price = restTemplate.getForObject("http://price-service/priceservice/" + c.getId(), Price.class);
+            Store store = restTemplate.getForObject("http://store-service/storeservice/" + c.getId(), Store.class);
             c.setAmount(price.getAmount());
             c.setQuantity(store.getQuantity());
         });
